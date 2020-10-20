@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DuLichHai Phong</string>
+    <string name="next">TIẾP</string>
+    <string name="skip">BỎ QUA</string>
+    <string name="start">ĐĂNG NHẬP</string>
+    <string name="title_home">THÔNG TIN TÀI KHOẢN</string>
+    <string name="slide_1_title">Văn hóa - lịch sử</string>
+    <string name="slide_1_desc">Mang đến những thông tin tổng quan về Hải Phòng</string>
+
+    <string name="slide_2_title">Khám phá tâm linh</string>
+    <string name="slide_2_desc">Cung cấp thông tin những điểm đến du lịch giúp du khách có một cái nhìn tổng quan.</string>
+
+    <string name="slide_3_title">Hỗ trợ tìm kiếm</string>
+    <string name="slide_3_desc">Công cụ chỉ đường giúp du khách dễ dàng tìm kiếm các điểm du lịch của riêng mình.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

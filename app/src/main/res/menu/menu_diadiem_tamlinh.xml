@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dinh"
+        android:title="Đình"
+        android:icon="@drawable/den"
+        android:layout_gravity="center"/>
+    <item
+        android:id="@+id/den"
+        android:title="Đền"
+        android:icon="@drawable/dinh"
+        android:layout_gravity="center"/>
+    <item
+        android:id="@+id/chua"
+        android:title="Chùa"
+        android:icon="@drawable/icon_chua"
+        android:layout_gravity="center"/>
+
+</menu>
