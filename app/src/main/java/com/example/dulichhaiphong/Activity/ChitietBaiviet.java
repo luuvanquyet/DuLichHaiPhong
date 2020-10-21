@@ -27,8 +27,10 @@ import com.example.dulichhaiphong.Adapter.AnhAdapter;
 import com.example.dulichhaiphong.Fragment.Anh_Bai_Viet_Fragment;
 import com.example.dulichhaiphong.Fragment.Fragment_Cautraloi;
 import com.example.dulichhaiphong.Fragment.Fragment_Comment;
+import com.example.dulichhaiphong.Fragment.Fragment_Danhgia;
 import com.example.dulichhaiphong.Model.AnhLienQuan;
 import com.example.dulichhaiphong.Model.Baiviet;
+import com.example.dulichhaiphong.Model.SessionManager;
 import com.example.dulichhaiphong.R;
 import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
@@ -54,6 +56,10 @@ public class ChitietBaiviet extends AppCompatActivity {
     private String idbaiviet;
     private FloatingActionButton fPlus,fView,fComment,fShare,fLike;
     boolean anHien = false;
+    private String getId;
+    private HashMap<String,String> user;
+    private boolean liekd = false;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +67,6 @@ public class ChitietBaiviet extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Bài viết");
         setSupportActionBar(toolbar);
-
         if(getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -75,6 +80,7 @@ public class ChitietBaiviet extends AppCompatActivity {
         if(intent!=null){
             Baiviet baiviet = (Baiviet) intent.getSerializableExtra("baiviet");
             khoiTaoContent(baiviet);
+            sessionManager = new SessionManager(this);
         }
         if(CheckConNection.haveNetwordConnection(getApplicationContext())){
             initView();
@@ -102,16 +108,34 @@ public class ChitietBaiviet extends AppCompatActivity {
                     fragmentComment.show(getSupportFragmentManager(),"Cautraloi");
                 }
             });
+
             fLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChitietBaiviet.this,"Da chon Like",Toast.LENGTH_SHORT).show();
+                    if(sessionManager.isLoggin()){
+                        if(liekd ==true){
+                            Toast.makeText(ChitietBaiviet.this,"Bạn đã like bài viết này rồi!",Toast.LENGTH_SHORT).show();
+                        }else{
+                            HashMap<String,String> user = sessionManager.getUserDetail();
+                            getId = user.get(SessionManager.ID);
+                            Insert_like_baiviet(Server.url_insert_like_baiviet,idbaiviet,getId);
+                        }
+                    }
                 }
             });
             fComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChitietBaiviet.this,"Da chon Comment",Toast.LENGTH_SHORT).show();
+                   if(sessionManager.isLoggin()){
+                       HashMap<String,String> user = sessionManager.getUserDetail();
+                       getId = user.get(SessionManager.ID);
+                       Fragment_Danhgia fragmentComment = new Fragment_Danhgia();
+                       Bundle bundle = new Bundle();
+                       bundle.putString("idbaiviet",idbaiviet);
+                       bundle.putString("iduser",getId);
+                       fragmentComment.setArguments(bundle);
+                       fragmentComment.show(getSupportFragmentManager(),"Danhgia");
+                   }
                 }
             });
             fShare.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +183,79 @@ public class ChitietBaiviet extends AppCompatActivity {
         fComment.hide();
         fShare.hide();
         fLike.hide();
+    }
+    private void Insert_like_baiviet(String url, final String idbaiviet, final String iduser){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response!=null){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String success = jsonObject.getString("success");
+                        if(success.equals("1")){
+                            Toast.makeText(ChitietBaiviet.this,"Like bài viết thành công!",Toast.LENGTH_SHORT).show();
+                            fLike.setImageResource(R.drawable.ic_liked);
+                            liekd = true;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ChitietBaiviet.this,"Lỗi like",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ChitietBaiviet.this,"Lỗi like",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("key",Server.key);
+                params.put("idUser",iduser);
+                params.put("idBaiviet",idbaiviet);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+    private void Check_like_baiviet(String url,final String idbaiviet,final String iduser){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response!=null){
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String success = jsonObject.getString("success");
+                        if(success.equals("1")){
+                            fLike.setImageResource(R.drawable.ic_liked);
+                            liekd = true;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ChitietBaiviet.this,"Lỗi kiểm tra like",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ChitietBaiviet.this,"Lỗi kiểm tra like",Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("key",Server.key);
+                params.put("idUser",iduser);
+                params.put("idBaiviet",idbaiviet);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
     private void Read_AnhLienQuan(String url, final ArrayList<AnhLienQuan> anhLienQuans){
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -218,5 +315,10 @@ public class ChitietBaiviet extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapterAnh = new AnhAdapter( this,anhLienQuanArrayList,this);
         recyclerView.setAdapter(adapterAnh);
+        if(sessionManager.isLoggin()){
+            HashMap<String,String> user = sessionManager.getUserDetail();
+            getId = user.get(SessionManager.ID);
+            Check_like_baiviet(Server.url_check_like_baiviet,idbaiviet,getId);
+        }
     }
 }

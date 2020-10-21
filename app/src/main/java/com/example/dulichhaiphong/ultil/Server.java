@@ -12,4 +12,7 @@ public class Server {
     public static String url_anh_lien_quan = "http://dulichhaiphong.xyz/images/anhlienquan/";
     public static String url_read_anh_lien_quan = "http://dulichhaiphong.xyz/api/read_anhlienquan.php";
     public static String url_read_comment = "http://dulichhaiphong.xyz/api/read_comment.php";
+    public static String url_send_binhluan = "http://dulichhaiphong.xyz/api/insert_binhluan.php";
+    public static String url_check_like_baiviet = "http://dulichhaiphong.xyz/api/check_like_baiviet.php";
+    public static String url_insert_like_baiviet = "http://dulichhaiphong.xyz/api/insert_like_baiviet.php";
 }

@@ -66,7 +66,6 @@ public class Den_fragment extends Fragment {
     private String tenView,tenCap,tenQuanHuyen,tenLoaiditich;
     private ArrayList<String> arrayTencap,arrayTenquanhuyen,arrayLoaiDitich;
     private ArrayList<Anh_Slider_URL> arraySlider;
-    private static String url_read_Slider ="http://dulichhaiphong.xyz/api/read_anhSlider.php";
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,7 +79,7 @@ public class Den_fragment extends Fragment {
             Anhxa();
             HienLRecyclerView();
             Hieuungmay();
-            Read_anhSlider(url_read_Slider,arraySlider,"app-den");
+            Read_anhSlider(Server.url_read_Slider,arraySlider,"app-den");
             HienSilder();
         }else{
             Toast.makeText(getActivity(),"Mời bạn kiểm tra lại Internet!",Toast.LENGTH_SHORT).show();
