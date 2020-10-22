@@ -15,4 +15,8 @@ public class Server {
     public static String url_send_binhluan = "http://dulichhaiphong.xyz/api/insert_binhluan.php";
     public static String url_check_like_baiviet = "http://dulichhaiphong.xyz/api/check_like_baiviet.php";
     public static String url_insert_like_baiviet = "http://dulichhaiphong.xyz/api/insert_like_baiviet.php";
+    public static String url_login = "http://dulichhaiphong.xyz/api/login.php";
+    public static String url_check_email = "http://dulichhaiphong.xyz/api/check_account.php";
+    public static String url_register = "http://dulichhaiphong.xyz/api/register.php";
+    public static String url_update_pass = "http://dulichhaiphong.xyz/api/update_pass.php";
 }

@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dulichhaiphong.R;
+import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
 
 import org.json.JSONException;
@@ -33,51 +34,55 @@ public class RegiesterActivity extends AppCompatActivity {
     private Button btnRegister;
     private ProgressBar loading;
     private ImageView imgBack;
-    private static String url_register = "http://dulichhaiphong.xyz/api/register.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regiester);
         Anhxa();
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String mname = name.getText().toString().trim();
-                final String memail = email.getText().toString().trim();
-                final String mpassword = password.getText().toString().trim();
-                final String maccount = account.getText().toString().trim();
-                String cmpassword = c_password.getText().toString().trim();
-                if(mname.isEmpty()||memail.isEmpty()||mpassword.isEmpty()||cmpassword.isEmpty()||maccount.isEmpty()){
-                    if(mname.isEmpty()){
-                        name.setError("Mời bạn nhập họ tên");
-                    }
-                    if(memail.isEmpty()){
-                        email.setError("Mời bạn nhập Email");
-                    }
-                    if(mpassword.isEmpty()){
-                        password.setError("Mời bạn nhập Password");
-                    }
-                    if(cmpassword.isEmpty()){
-                        c_password.setError("Mời bạn nhập lại Password");
-                    }
-                    if(maccount.isEmpty()){
-                        account.setError("Mời bạn nhập tên tài khoản");
-                    }
-                }else{
-                    if(cmpassword.equals(mpassword)&& Kiemtraemail(memail)){
-                        Regist(mname,memail,mpassword,maccount);
-                    }else{
-                        if(!Kiemtraemail(memail)){
-                            email.setError("Email không hợp lệ!");
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
+            btnRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String mname = name.getText().toString().trim();
+                    final String memail = email.getText().toString().trim();
+                    final String mpassword = password.getText().toString().trim();
+                    final String maccount = account.getText().toString().trim();
+                    String cmpassword = c_password.getText().toString().trim();
+                    if(mname.isEmpty()||memail.isEmpty()||mpassword.isEmpty()||cmpassword.isEmpty()||maccount.isEmpty()){
+                        if(mname.isEmpty()){
+                            name.setError("Mời bạn nhập họ tên");
                         }
-                        if(!cmpassword.equals(mpassword)){
+                        if(memail.isEmpty()){
+                            email.setError("Mời bạn nhập Email");
+                        }
+                        if(mpassword.isEmpty()){
+                            password.setError("Mời bạn nhập Password");
+                        }
+                        if(cmpassword.isEmpty()){
                             c_password.setError("Mời bạn nhập lại Password");
                         }
+                        if(maccount.isEmpty()){
+                            account.setError("Mời bạn nhập tên tài khoản");
+                        }
+                    }else{
+                        if(cmpassword.equals(mpassword)&& Kiemtraemail(memail)){
+                            Regist(mname,memail,mpassword,maccount);
+                        }else{
+                            if(!Kiemtraemail(memail)){
+                                email.setError("Email không hợp lệ!");
+                            }
+                            if(!cmpassword.equals(mpassword)){
+                                c_password.setError("Mời bạn nhập lại Password");
+                            }
 
+                        }
                     }
                 }
-            }
-        });
+            });
+        }else{
+            CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+        }
+
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +111,7 @@ public class RegiesterActivity extends AppCompatActivity {
     private void Regist(final String mname,final String memail,final String mpassword,final String maccount){
         loading.setVisibility(View.VISIBLE);
         btnRegister.setVisibility(View.GONE);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_register, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.url_register, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

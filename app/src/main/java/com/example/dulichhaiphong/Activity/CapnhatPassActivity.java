@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dulichhaiphong.R;
+import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
 
 import org.json.JSONException;
@@ -33,7 +34,6 @@ public class CapnhatPassActivity extends AppCompatActivity {
     private EditText eMatkhau,eXacnhanMK;
     private ImageView btnBack;
     private ProgressBar loading;
-    private static String url_update_pass = "http://dulichhaiphong.xyz/api/update_pass.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,40 +41,45 @@ public class CapnhatPassActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         getId = intent.getStringExtra("id");
         AnhXa();
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(CapnhatPassActivity.this,ComfirmEmailActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        btnXacnhan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String mMatkhau = eMatkhau.getText().toString().trim();
-                String mXacNhanMk = eXacnhanMK.getText().toString().trim();
-                if(mMatkhau.isEmpty()||mXacNhanMk.isEmpty()){
-                    if(mMatkhau.isEmpty()){
-                        eMatkhau.setError("Bạn chưa nhập mật khẩu!");
-                    }
-                    if(mXacNhanMk.isEmpty()){
-                        eXacnhanMK.setError("Bạn chưa xác nhận mật khẩu!");
-                    }
-                }else{
-                    if(!mMatkhau.equals(mXacNhanMk)){
-                        eXacnhanMK.setError("Bạn nhập mật khẩu chưa chính xác!");
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent1 = new Intent(CapnhatPassActivity.this,ComfirmEmailActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            btnXacnhan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String mMatkhau = eMatkhau.getText().toString().trim();
+                    String mXacNhanMk = eXacnhanMK.getText().toString().trim();
+                    if(mMatkhau.isEmpty()||mXacNhanMk.isEmpty()){
+                        if(mMatkhau.isEmpty()){
+                            eMatkhau.setError("Bạn chưa nhập mật khẩu!");
+                        }
+                        if(mXacNhanMk.isEmpty()){
+                            eXacnhanMK.setError("Bạn chưa xác nhận mật khẩu!");
+                        }
                     }else{
-                        CapnhatMatkhau(mMatkhau);
+                        if(!mMatkhau.equals(mXacNhanMk)){
+                            eXacnhanMK.setError("Bạn nhập mật khẩu chưa chính xác!");
+                        }else{
+                            CapnhatMatkhau(mMatkhau);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }else{
+            CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+        }
+
     }
     private void CapnhatMatkhau(final String mMatkhau){
         loading.setVisibility(View.VISIBLE);
         btnXacnhan.setVisibility(View.GONE);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_update_pass, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.url_update_pass, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

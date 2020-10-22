@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dulichhaiphong.R;
+import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
 
 import org.json.JSONException;
@@ -33,7 +34,6 @@ public class ComfirmEmailActivity extends AppCompatActivity {
     private EditText editAccount;
     private ImageView btnBack;
     private ProgressBar loading;
-    private static String url_check_email = "http://dulichhaiphong.xyz/api/check_account.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,22 +47,26 @@ public class ComfirmEmailActivity extends AppCompatActivity {
                 finish();
             }
         });
-        btnXacnhan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String maccount = editAccount.getText().toString().trim();
-                if(maccount.isEmpty()){
-                    editAccount.setError("Mời bạn nhập tên tài khoản!");
-                }else{
-                    checkAccount(maccount);
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
+            btnXacnhan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String maccount = editAccount.getText().toString().trim();
+                    if(maccount.isEmpty()){
+                        editAccount.setError("Mời bạn nhập tên tài khoản!");
+                    }else{
+                        checkAccount(maccount);
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+        }
     }
     private void checkAccount(final String maccount){
         loading.setVisibility(View.VISIBLE);
         btnXacnhan.setVisibility(View.GONE);;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_check_email, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.url_check_email, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

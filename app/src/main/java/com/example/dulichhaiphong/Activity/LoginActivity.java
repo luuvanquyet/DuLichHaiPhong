@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dulichhaiphong.Model.SessionManager;
 import com.example.dulichhaiphong.R;
+import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
 
 import org.json.JSONArray;
@@ -35,35 +36,40 @@ public class LoginActivity extends AppCompatActivity {
     private TextView linkRegist,linkDoimatkhau,linkBoqua;
     private ProgressBar loading;
     SessionManager sessionManager;
-    private static String url_login = "http://dulichhaiphong.xyz/api/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Anhxa();
+
         sessionManager = new SessionManager(this);
         if(sessionManager.isLoggin()){
             Intent intent = new Intent(LoginActivity.this,Trangchu.class);
             startActivity(intent);
             finish();
         }
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String mAccount = account.getText().toString().trim();
-                String mPass = password.getText().toString().trim();
-                if(mAccount.isEmpty()||mPass.isEmpty()){
-                    if(mAccount.isEmpty()){
-                        account.setError("Mời bạn nhập email");
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String mAccount = account.getText().toString().trim();
+                    String mPass = password.getText().toString().trim();
+                    if(mAccount.isEmpty()||mPass.isEmpty()){
+                        if(mAccount.isEmpty()){
+                            account.setError("Mời bạn nhập email");
+                        }
+                        if(mPass.isEmpty()){
+                            password.setError("Mời bạn nhập password");
+                        }
+                    }else{
+                        Login(mAccount,mPass);
                     }
-                    if(mPass.isEmpty()){
-                        password.setError("Mời bạn nhập password");
-                    }
-                }else{
-                    Login(mAccount,mPass);
                 }
-            }
-        });
+            });
+        }else{
+            CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+        }
+
         linkRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     private void Login(final String mAccount, final String mpass){
         loading.setVisibility(View.VISIBLE);
         btnLogin.setVisibility(View.GONE);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url_login, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.url_login, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

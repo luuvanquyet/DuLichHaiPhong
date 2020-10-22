@@ -36,6 +36,7 @@ import com.example.dulichhaiphong.Fragment.Fragment_Doimatkhau;
 import com.example.dulichhaiphong.Model.SessionManager;
 import com.example.dulichhaiphong.Model.TruyenDataPass;
 import com.example.dulichhaiphong.R;
+import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -74,25 +75,30 @@ public class HomeActivity extends AppCompatActivity implements TruyenDataPass {
         sessionManager.checkLogin();
         HashMap<String,String> user = sessionManager.getUserDetail();
         getId = user.get(SessionManager.ID);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sessionManager.logout();
-            }
-        });
-        btnPhotoUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chosesFile();
-            }
-        });
-        btnDoimatkhau.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment_doimatkhau = new Fragment_Doimatkhau();
-                fragment_doimatkhau.show(getFragmentManager(),"Đổi mật khẩu");
-            }
-        });
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
+            btnLogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sessionManager.logout();
+                }
+            });
+            btnPhotoUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    chosesFile();
+                }
+            });
+            btnDoimatkhau.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fragment_doimatkhau = new Fragment_Doimatkhau();
+                    fragment_doimatkhau.show(getFragmentManager(),"Đổi mật khẩu");
+                }
+            });
+        }else{
+            CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+        }
+
     }
     private void Anhxa(){
         txtAccount = (TextView) findViewById(R.id.account);

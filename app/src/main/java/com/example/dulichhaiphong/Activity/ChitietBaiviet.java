@@ -28,6 +28,7 @@ import com.example.dulichhaiphong.Fragment.Anh_Bai_Viet_Fragment;
 import com.example.dulichhaiphong.Fragment.Fragment_Cautraloi;
 import com.example.dulichhaiphong.Fragment.Fragment_Comment;
 import com.example.dulichhaiphong.Fragment.Fragment_Danhgia;
+import com.example.dulichhaiphong.Fragment.Fragment_login;
 import com.example.dulichhaiphong.Model.AnhLienQuan;
 import com.example.dulichhaiphong.Model.Baiviet;
 import com.example.dulichhaiphong.Model.SessionManager;
@@ -53,12 +54,14 @@ public class ChitietBaiviet extends AppCompatActivity {
     private WebView txtNoidung;
     private TextView txtTieude,txtNgaydang;
     private AnhAdapter adapterAnh;
-    private String idbaiviet;
-    private FloatingActionButton fPlus,fView,fComment,fShare,fLike;
+    public static String idbaiviet;
+    private FloatingActionButton fPlus,fView,fComment,fShare;
+    public static FloatingActionButton fLike;
+    public static boolean isDanhgia = false;
     boolean anHien = false;
     private String getId;
     private HashMap<String,String> user;
-    private boolean liekd = false;
+    public static boolean liekd = false;
     SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +123,9 @@ public class ChitietBaiviet extends AppCompatActivity {
                             getId = user.get(SessionManager.ID);
                             Insert_like_baiviet(Server.url_insert_like_baiviet,idbaiviet,getId);
                         }
+                    }else{
+                        Fragment_login fragment_login = new Fragment_login();
+                        fragment_login.show(getSupportFragmentManager(),"login");
                     }
                 }
             });
@@ -135,6 +141,10 @@ public class ChitietBaiviet extends AppCompatActivity {
                        bundle.putString("iduser",getId);
                        fragmentComment.setArguments(bundle);
                        fragmentComment.show(getSupportFragmentManager(),"Danhgia");
+                   }else{
+                       Fragment_login fragment_login = new Fragment_login();
+                       fragment_login.show(getSupportFragmentManager(),"login");
+                       isDanhgia = true;
                    }
                 }
             });
@@ -148,6 +158,7 @@ public class ChitietBaiviet extends AppCompatActivity {
             CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại INTERNET!");
         }
     }
+
     private void khoiTaoContent(Baiviet baiviet){
         Picasso.get().load(Server.url_anh+baiviet.getAnhDaidien()).networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE).into(anhHeader);
         txtTieude.setText(baiviet.getTenBaiViet());
@@ -306,6 +317,16 @@ public class ChitietBaiviet extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(sessionManager.isLoggin()){
+            HashMap<String,String> user = sessionManager.getUserDetail();
+            getId = user.get(SessionManager.ID);
+            Check_like_baiviet(Server.url_check_like_baiviet,idbaiviet,getId);
+        }
+    }
+
     public void initView(){
         anhLienQuanArrayList = new ArrayList<>();
         Read_AnhLienQuan(Server.url_read_anh_lien_quan,anhLienQuanArrayList);
@@ -315,10 +336,6 @@ public class ChitietBaiviet extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapterAnh = new AnhAdapter( this,anhLienQuanArrayList,this);
         recyclerView.setAdapter(adapterAnh);
-        if(sessionManager.isLoggin()){
-            HashMap<String,String> user = sessionManager.getUserDetail();
-            getId = user.get(SessionManager.ID);
-            Check_like_baiviet(Server.url_check_like_baiviet,idbaiviet,getId);
-        }
+
     }
 }
