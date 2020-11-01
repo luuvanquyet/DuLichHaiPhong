@@ -43,10 +43,7 @@ import java.util.Map;
 public class DiaDiemTamLinh extends AppCompatActivity implements TimkiemTamlinh {
     BottomNavigationView bottomNavigationView;
     ArrayList<String> arrayCapcongnhan,arrayLoaiditich,arrayQuanHuyen;
-    ArrayList<Baiviet> danhSachBaivietDinh,danhSachBaivietDen,danhSachBaivietChua;
-    Slider_Adapter slider_adapterAnhChua;
     String tenCapCongNhan,tenLoaiDitich,tenQuanhuyen;
-    private ArrayList<Anh_Slider_URL> arraySliderDinh,arraySliderDen,arraySliderChua;
     Bundle bundle;
     Fragment fragment;
     @Override

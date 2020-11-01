@@ -19,4 +19,12 @@ public class Server {
     public static String url_check_email = "http://dulichhaiphong.xyz/api/check_account.php";
     public static String url_register = "http://dulichhaiphong.xyz/api/register.php";
     public static String url_update_pass = "http://dulichhaiphong.xyz/api/update_pass.php";
+    public static String url_danhmuc = "http://dulichhaiphong.xyz/api/read_tenDanhMuc.php";
+    public static String url_search_Vinh_Dao_Hangdong = "http://dulichhaiphong.xyz/api/search_Vinh_Dao_Hangdong.php";
+    public static String url_read_tenNhanvat = "http://dulichhaiphong.xyz/api/read_tenNhanVat.php";
+    public static String url_read_baiviet_Nhavatlichsu = "http://dulichhaiphong.xyz/api/read_Nhanvatlichsu.php";
+    public static String url_read_baiviet_langnghe ="http://dulichhaiphong.xyz/api/search_baiviet_langnghe.php";
+    public static String url_search_baiviet_lehoi = "http://dulichhaiphong.xyz/api/search_baiviet_lehoi.php";
+    public static String url_search_baiviet_ditichlichsu = "http://dulichhaiphong.xyz/api/search_baiviet_ditichlichsu.php";
+    public static String url_read_lichsuphattrien = "http://dulichhaiphong.xyz/api/read_baiviet_lichsuphattrien.php";
 }

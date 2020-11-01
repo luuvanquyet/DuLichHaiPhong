@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="130dp">
@@ -56,10 +57,10 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginBottom="80dp">
+                    android:layout_marginBottom="30dp">
                     <TextView
                         android:id="@+id/tieude_baiviet"
                         android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
                         android:layout_marginTop="12dp"
                         android:textStyle="bold"
                         android:textColor="#000"
-                        android:text="Ghé Đền Tràng Kênh - Ngôi Đền Nổi Tiếng Của Hải Phòng"
+                        android:text="Nội dung"
                         android:layout_marginBottom="15dp"
                         />
                     <TextView
@@ -123,7 +124,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:background="#E6BDBDBD"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="120dp"
         android:id="@+id/recycleview_anh_lien_quan"
         android:horizontalSpacing="10dp"
         android:orientation="horizontal"

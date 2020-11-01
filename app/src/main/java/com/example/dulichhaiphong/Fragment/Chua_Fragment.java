@@ -80,7 +80,7 @@ public class Chua_Fragment extends Fragment  {
             Anhxa();
             HienLRecyclerView();
             Hieuungmay();
-            Read_anhSlider(Server.url_read_Slider,arraySlider,"app-chua");
+            Read_anhSlider(Server.url_read_Slider,arraySlider,"Chùa");
             HienSilder();
         }else{
             Toast.makeText(getActivity(),"Mời bạn kiểm tra lại Internet!",Toast.LENGTH_SHORT).show();
@@ -89,6 +89,7 @@ public class Chua_Fragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
+                getActivity().finish();
             }
         });
         return view;

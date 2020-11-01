@@ -13,8 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.FaQActivity"
-            android:theme="@style/AppThemeFAQ"></activity>
+        <activity android:name=".Activity.LichsuphattrienActivity"
+            android:theme="@style/ThemeLichsu"></activity>
+        <activity
+            android:name=".Activity.DitichlichsuActivity"
+            android:theme="@style/ThemeDitich" />
+        <activity
+            android:name=".Activity.LehoiActivity"
+            android:theme="@style/ThemeLehoi" />
+        <activity
+            android:name=".Activity.LangngheActivity"
+            android:theme="@style/ThemeLangnghe" />
+        <activity
+            android:name=".Activity.NhanvatlichsuActivity"
+            android:theme="@style/AppThemeVinh" />
+        <activity
+            android:name=".Activity.Vinh_Dao_HangdongActivity"
+            android:theme="@style/AppThemeVinh" />
+        <activity
+            android:name=".Activity.FaQActivity"
+            android:theme="@style/AppThemeFAQ" />
         <activity
             android:name=".Activity.RegiesterActivity"
             android:theme="@style/AppThemeLogin" />
@@ -39,7 +57,7 @@
             android:theme="@style/OrangeTheme" />
         <activity
             android:name=".Activity.DiaDiemTamLinh"
-            android:theme="@style/TrangchuTheme" />
+            android:theme="@style/OrangeTheme" />
         <activity
             android:name=".Activity.Slider_Next"
             android:theme="@style/OrangeTheme" />

@@ -58,8 +58,8 @@ public class FaQActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FaQActivity.this,Trangchu.class);
-                startActivity(intent);
+               onBackPressed();
+               finish();
             }
         });
     }

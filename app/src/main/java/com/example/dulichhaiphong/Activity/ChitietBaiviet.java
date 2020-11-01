@@ -2,7 +2,7 @@ package com.example.dulichhaiphong.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,8 +10,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +22,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dulichhaiphong.Adapter.AnhAdapter;
-import com.example.dulichhaiphong.Fragment.Anh_Bai_Viet_Fragment;
-import com.example.dulichhaiphong.Fragment.Fragment_Cautraloi;
 import com.example.dulichhaiphong.Fragment.Fragment_Comment;
 import com.example.dulichhaiphong.Fragment.Fragment_Danhgia;
 import com.example.dulichhaiphong.Fragment.Fragment_login;
@@ -49,6 +48,7 @@ import java.util.Map;
 
 public class ChitietBaiviet extends AppCompatActivity {
     private ArrayList<AnhLienQuan> anhLienQuanArrayList;
+    private CoordinatorLayout content;
     private RecyclerView recyclerView;
     private ImageView anhHeader;
     private WebView txtNoidung;
@@ -171,6 +171,7 @@ public class ChitietBaiviet extends AppCompatActivity {
         txtNoidung.getSettings().setLoadWithOverviewMode(true);
         txtNoidung.loadDataWithBaseURL("http://dulichhaiphong.xyz","<style>img{display: inline;height: auto;max-width: 100%;}</style>"+ baiviet.getNoiDung(),"text/html","utf-8",null);
         idbaiviet = baiviet.getIdBaiViet();
+        content = (CoordinatorLayout) findViewById(R.id.content);
     }
     private void Anhxa(){
         anhHeader = (ImageView) findViewById(R.id.anhTitle);
@@ -282,14 +283,24 @@ public class ChitietBaiviet extends AppCompatActivity {
                         String success = jsonObject.getString("success");
                         JSONArray jsonArray = jsonObject.getJSONArray("read");
                         if(success.equals("1")){
-                            for(int i = 0; i<jsonArray.length();i++){
-                                JSONObject anhlienquan = jsonArray.getJSONObject(i);
-                                String id = anhlienquan.getString("Id");
-                                String title = anhlienquan.getString("tenTitle");
-                                String file = anhlienquan.getString("file");
-                                anhLienQuans.add(new AnhLienQuan(id,title,file));
-                            }
-                            adapterAnh.notifyDataSetChanged();
+                                for(int i = 0; i<jsonArray.length();i++){
+                                    JSONObject anhlienquan = jsonArray.getJSONObject(i);
+                                    String id = anhlienquan.getString("Id");
+                                    String title = anhlienquan.getString("tenTitle");
+                                    String file = anhlienquan.getString("file");
+                                    anhLienQuans.add(new AnhLienQuan(id,title,file));
+                                    if(id.equals("null")){
+                                        ViewGroup.LayoutParams params = recyclerView.getLayoutParams();
+                                        params.height = 10;
+                                        recyclerView.setLayoutParams(params);
+                                        recyclerView.setVisibility(View.GONE);
+                                        final RelativeLayout.LayoutParams layoutparams = (RelativeLayout.LayoutParams)content.getLayoutParams();
+                                        layoutparams.setMargins(0,0,0,10);
+                                        content.setLayoutParams(layoutparams);
+
+                                    }
+                                }
+                                adapterAnh.notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

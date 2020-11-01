@@ -25,7 +25,7 @@ import java.util.List;
 public class Trangchu extends AppCompatActivity {
     private ImageView logohoaphuong;
     private ViewPager2 viewPager2;
-    private CardView logout,cvTaikhoan,cardFaq;
+    private CardView logout,cvTaikhoan,cardFaq,cardNvlichsu,cardLangnghe,cardLeHoi,cardLichsuphatrien;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,34 @@ public class Trangchu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        cardNvlichsu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Trangchu.this,NhanvatlichsuActivity.class);
+                startActivity(intent);
+            }
+        });
+        cardLangnghe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Trangchu.this,LangngheActivity.class);
+                startActivity(intent);
+            }
+        });
+        cardLeHoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Trangchu.this,LehoiActivity.class);
+                startActivity(intent);
+            }
+        });
+        cardLichsuphatrien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Trangchu.this,LichsuphattrienActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void Anhxa(){
         logohoaphuong = (ImageView)findViewById(R.id.imgLogohoaphuong);
@@ -61,10 +89,13 @@ public class Trangchu extends AppCompatActivity {
         logout = (CardView) findViewById(R.id.Logout);
         cvTaikhoan = (CardView) findViewById(R.id.cVTaikhoan);
         cardFaq = (CardView) findViewById(R.id.cardFaq);
+        cardNvlichsu = (CardView) findViewById(R.id.cardNvLichsu);
+        cardLangnghe = (CardView) findViewById(R.id.cardLangnghe);
+        cardLeHoi = (CardView) findViewById(R.id.cardLeHoi);
+        cardLichsuphatrien = (CardView) findViewById(R.id.cardLichsuphatrien);
     }
     private void CauhinhSlider(){
         List<Slider_Item_Trangchu> itemList = new ArrayList<>();
-        itemList.add(new Slider_Item_Trangchu(R.drawable.lehoi,"Lễ hội"));
         itemList.add(new Slider_Item_Trangchu(R.drawable.diadiem_tamlinh,"Địa điểm tâm linh"));
         itemList.add(new Slider_Item_Trangchu(R.drawable.ditich_lichsu,"Di tích lịch sử"));
         itemList.add(new Slider_Item_Trangchu(R.drawable.vinh_dao,"Vịnh-đảo-hang động"));

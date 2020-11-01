@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dulichhaiphong.Activity.DiaDiemTamLinh;
+import com.example.dulichhaiphong.Activity.DitichlichsuActivity;
+import com.example.dulichhaiphong.Activity.Vinh_Dao_HangdongActivity;
 import com.example.dulichhaiphong.Model.Slider_Item_Trangchu;
 import com.example.dulichhaiphong.R;
 
@@ -44,17 +46,16 @@ public class Slider_Adapter_Trangchu extends RecyclerView.Adapter<Slider_Adapter
             public void onClick(View view) {
                 switch (position){
                     case 0:
-                        Toast.makeText(view.getContext(),position+"",Toast.LENGTH_SHORT).show();
+                        Intent intentTamlinh = new Intent(view.getContext(), DiaDiemTamLinh.class);
+                        view.getContext().startActivity(intentTamlinh);
                         break;
                     case 1:
-                        Intent intent = new Intent(view.getContext(), DiaDiemTamLinh.class);
-                        view.getContext().startActivity(intent);
+                        Intent intentDitich = new Intent(view.getContext(), DitichlichsuActivity.class);
+                        view.getContext().startActivity(intentDitich);
                         break;
                     case 2:
-                        Toast.makeText(view.getContext(),position+"",Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3:
-                        Toast.makeText(view.getContext(),position+"",Toast.LENGTH_SHORT).show();
+                         Intent intentVinh = new Intent(view.getContext(), Vinh_Dao_HangdongActivity.class);
+                        view.getContext().startActivity(intentVinh);
                         break;
                 }
             }

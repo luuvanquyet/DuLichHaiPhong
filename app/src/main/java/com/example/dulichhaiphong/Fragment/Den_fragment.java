@@ -79,7 +79,7 @@ public class Den_fragment extends Fragment {
             Anhxa();
             HienLRecyclerView();
             Hieuungmay();
-            Read_anhSlider(Server.url_read_Slider,arraySlider,"app-den");
+            Read_anhSlider(Server.url_read_Slider,arraySlider,"Đền ");
             HienSilder();
         }else{
             Toast.makeText(getActivity(),"Mời bạn kiểm tra lại Internet!",Toast.LENGTH_SHORT).show();
@@ -88,6 +88,7 @@ public class Den_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
+                getActivity().finish();
             }
         });
         return view;

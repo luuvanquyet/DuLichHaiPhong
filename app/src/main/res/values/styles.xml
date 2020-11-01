@@ -6,10 +6,40 @@
         <item name="colorPrimaryDark">#FEF400</item>
         <item name="colorAccent">#FF5252</item>
     </style>
+    <style name="ThemeLichsu" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#ECD9AF</item>
+        <item name="colorAccent">#842C1B</item>
+    </style>
+    <style name="ThemeLangnghe" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#842C1B</item>
+        <item name="colorAccent">#842C1B</item>
+    </style>
+    <style name="ThemeDitich" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#086F8D</item>
+        <item name="colorAccent">#842C1B</item>
+    </style>
+    <style name="ThemeLehoi" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#F5162D</item>
+        <item name="colorAccent">#842C1B</item>
+    </style>
     <style name="AppThemeFAQ" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#76B39D</item>
+        <item name="colorAccent">#FF5252</item>
+    </style>
+    <style name="AppThemeVinh" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#0261E1</item>
         <item name="colorAccent">#FF5252</item>
     </style>
     <style name="AppThemeHome" parent="Theme.AppCompat.Light.DarkActionBar">
