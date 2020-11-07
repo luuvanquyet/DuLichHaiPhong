@@ -25,7 +25,7 @@ import java.util.List;
 public class Trangchu extends AppCompatActivity {
     private ImageView logohoaphuong;
     private ViewPager2 viewPager2;
-    private CardView logout,cvTaikhoan,cardFaq,cardNvlichsu,cardLangnghe,cardLeHoi,cardLichsuphatrien;
+    private CardView logout,cvTaikhoan,cardFaq,cardNvlichsu,cardLangnghe,cardLeHoi,cardLichsuphatrien,cardBando;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +82,13 @@ public class Trangchu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        cardBando.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Trangchu.this,BandoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void Anhxa(){
         logohoaphuong = (ImageView)findViewById(R.id.imgLogohoaphuong);
@@ -93,6 +100,7 @@ public class Trangchu extends AppCompatActivity {
         cardLangnghe = (CardView) findViewById(R.id.cardLangnghe);
         cardLeHoi = (CardView) findViewById(R.id.cardLeHoi);
         cardLichsuphatrien = (CardView) findViewById(R.id.cardLichsuphatrien);
+        cardBando = (CardView) findViewById(R.id.cardBando);
     }
     private void CauhinhSlider(){
         List<Slider_Item_Trangchu> itemList = new ArrayList<>();

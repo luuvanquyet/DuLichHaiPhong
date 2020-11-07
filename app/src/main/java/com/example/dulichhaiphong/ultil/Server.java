@@ -27,4 +27,6 @@ public class Server {
     public static String url_search_baiviet_lehoi = "http://dulichhaiphong.xyz/api/search_baiviet_lehoi.php";
     public static String url_search_baiviet_ditichlichsu = "http://dulichhaiphong.xyz/api/search_baiviet_ditichlichsu.php";
     public static String url_read_lichsuphattrien = "http://dulichhaiphong.xyz/api/read_baiviet_lichsuphattrien.php";
+    public static String url_search_diadanh = "http://dulichhaiphong.xyz/api/search_diadanh.php";
+    public static String url_search_diadanh_theoten = "http://dulichhaiphong.xyz/api/search_diadanh_theoten.php";
 }
