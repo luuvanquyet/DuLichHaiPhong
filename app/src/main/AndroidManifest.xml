@@ -21,56 +21,73 @@
             android:value="@integer/google_play_services_version" />
         <activity
             android:name=".Activity.BandoActivity"
-            android:theme="@style/ThemeDitich" />
+            android:theme="@style/ThemeDitich"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activity.LichsuphattrienActivity"
-            android:theme="@style/ThemeLichsu"></activity>
+            android:theme="@style/ThemeLichsu"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activity.DitichlichsuActivity"
-            android:theme="@style/ThemeDitich" />
+            android:theme="@style/ThemeDitich"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.LehoiActivity"
-            android:theme="@style/ThemeLehoi" />
+            android:theme="@style/ThemeLehoi"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.LangngheActivity"
-            android:theme="@style/ThemeLangnghe" />
+            android:theme="@style/ThemeLangnghe"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.NhanvatlichsuActivity"
-            android:theme="@style/AppThemeVinh" />
+            android:theme="@style/AppThemeVinh"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Vinh_Dao_HangdongActivity"
-            android:theme="@style/AppThemeVinh" />
+            android:theme="@style/AppThemeVinh"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.FaQActivity"
-            android:theme="@style/AppThemeFAQ" />
+            android:theme="@style/AppThemeFAQ"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.RegiesterActivity"
-            android:theme="@style/AppThemeLogin" />
+            android:theme="@style/AppThemeLogin"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.CapnhatPassActivity"
-            android:theme="@style/AppThemeLogin" />
+            android:theme="@style/AppThemeLogin"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ComfirmEmailActivity"
-            android:theme="@style/AppThemeLogin" />
+            android:theme="@style/AppThemeLogin"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.HomeActivity"
             android:parentActivityName=".Activity.Trangchu"
-            android:theme="@style/AppThemeHome" />
+            android:theme="@style/AppThemeHome"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.LoginActivity"
-            android:theme="@style/AppThemeLogin" />
+            android:theme="@style/AppThemeLogin"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ChitietBaiviet"
-            android:theme="@style/ChiTietBaiVietTheme" />
+            android:theme="@style/ChiTietBaiVietTheme"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".Activity.Slider"
-            android:theme="@style/OrangeTheme" />
+            android:name=".Activity.Trangchu"
+            android:theme="@style/TrangchuTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.DiaDiemTamLinh"
-            android:theme="@style/OrangeTheme" />
+            android:theme="@style/OrangeTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.Slider_Next"
-            android:theme="@style/OrangeTheme" />
-        <activity android:name=".Activity.Trangchu">
+            android:theme="@style/OrangeTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.Slider">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

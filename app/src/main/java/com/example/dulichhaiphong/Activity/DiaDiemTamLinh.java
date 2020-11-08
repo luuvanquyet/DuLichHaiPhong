@@ -29,6 +29,7 @@ import com.example.dulichhaiphong.Model.Baiviet;
 import com.example.dulichhaiphong.Model.TimkiemTamlinh;
 import com.example.dulichhaiphong.Model.TruyenDataPass;
 import com.example.dulichhaiphong.R;
+import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,52 +51,58 @@ public class DiaDiemTamLinh extends AppCompatActivity implements TimkiemTamlinh 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dia_diem_tam_linh);
-        Loaddulieu_Fragment();
-        tenCapCongNhan ="";
-        tenLoaiDitich="";
-        tenQuanhuyen="";
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                fragment = null;
-                switch (item.getItemId()){
-                    case R.id.den:
-                        fragment = new Den_fragment();
-                        bundle = new Bundle();
-                        Bundle_Filter(bundle);
-                        bundle.putString("TenCap",tenCapCongNhan);
-                        bundle.putString("TenQuanHuyen",tenQuanhuyen);
-                        bundle.putString("TenLoaiDitich",tenLoaiDitich);
-                        bundle.putString("TenView","den");
-                        break;
-                    case  R.id.chua:
-                        fragment = new Chua_Fragment();
-                        bundle = new Bundle();
-                        Bundle_Filter(bundle);
-                        bundle.putString("TenCap",tenCapCongNhan);
-                        bundle.putString("TenQuanHuyen",tenQuanhuyen);
-                        bundle.putString("TenLoaiDitich",tenLoaiDitich);
-                        bundle.putString("TenView","chua");
-                        break;
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
+            Loaddulieu_Fragment();
+            tenCapCongNhan ="";
+            tenLoaiDitich="";
+            tenQuanhuyen="";
+            bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    fragment = null;
+                    switch (item.getItemId()){
+                        case R.id.den:
+                            fragment = new Den_fragment();
+                            bundle = new Bundle();
+                            Bundle_Filter(bundle);
+                            bundle.putString("TenCap",tenCapCongNhan);
+                            bundle.putString("TenQuanHuyen",tenQuanhuyen);
+                            bundle.putString("TenLoaiDitich",tenLoaiDitich);
+                            bundle.putString("TenView","den");
+                            break;
+                        case  R.id.chua:
+                            fragment = new Chua_Fragment();
+                            bundle = new Bundle();
+                            Bundle_Filter(bundle);
+                            bundle.putString("TenCap",tenCapCongNhan);
+                            bundle.putString("TenQuanHuyen",tenQuanhuyen);
+                            bundle.putString("TenLoaiDitich",tenLoaiDitich);
+                            bundle.putString("TenView","chua");
+                            break;
 
-                    case  R.id.dinh:
-                        fragment = new Dinh_fragmnet();
-                        bundle = new Bundle();
-                        Bundle_Filter(bundle);
-                        bundle.putString("TenCap",tenCapCongNhan);
-                        bundle.putString("TenQuanHuyen",tenQuanhuyen);
-                        bundle.putString("TenLoaiDitich",tenLoaiDitich);
-                        bundle.putString("TenView","dinh");
-                        break;
+                        case  R.id.dinh:
+                            fragment = new Dinh_fragmnet();
+                            bundle = new Bundle();
+                            Bundle_Filter(bundle);
+                            bundle.putString("TenCap",tenCapCongNhan);
+                            bundle.putString("TenQuanHuyen",tenQuanhuyen);
+                            bundle.putString("TenLoaiDitich",tenLoaiDitich);
+                            bundle.putString("TenView","dinh");
+                            break;
+                    }
+                    fragment.setArguments(bundle);
+                    final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container,fragment).commit();
+                    return true;
                 }
-                fragment.setArguments(bundle);
-                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.container,fragment).commit();
-                return true;
-            }
-        });
-        bottomNavigationView.setSelectedItemId(R.id.chua);
+            });
+            bottomNavigationView.setSelectedItemId(R.id.chua);
+        }else{
+            CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+            finish();
+        }
+
 
     }
     private void Bundle_Filter(Bundle bundle){

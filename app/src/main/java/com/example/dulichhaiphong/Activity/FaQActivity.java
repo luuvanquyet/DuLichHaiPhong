@@ -54,6 +54,7 @@ public class FaQActivity extends AppCompatActivity {
             HienLRecyclerView();
         }else {
             CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+            finish();
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override

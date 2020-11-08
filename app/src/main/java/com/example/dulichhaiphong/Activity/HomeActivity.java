@@ -70,12 +70,12 @@ public class HomeActivity extends AppCompatActivity implements TruyenDataPass {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Anhxa();
+        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
         HashMap<String,String> user = sessionManager.getUserDetail();
         getId = user.get(SessionManager.ID);
-        if(CheckConNection.haveNetwordConnection(getApplicationContext())){
             btnLogout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -97,6 +97,7 @@ public class HomeActivity extends AppCompatActivity implements TruyenDataPass {
             });
         }else{
             CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+            finish();
         }
 
     }

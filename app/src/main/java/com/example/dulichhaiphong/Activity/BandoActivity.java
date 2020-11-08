@@ -117,6 +117,7 @@ public class BandoActivity extends AppCompatActivity implements OnMapReadyCallba
             });
         }else{
             CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+            finish();
         }
 
     }

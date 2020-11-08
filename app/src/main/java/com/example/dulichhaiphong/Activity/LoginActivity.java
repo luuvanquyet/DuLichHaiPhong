@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }else{
             CheckConNection.ShowToast_Short(getApplicationContext(),"Mời bạn kiểm tra lại Internet!");
+            finish();
         }
 
         linkRegist.setOnClickListener(new View.OnClickListener() {
