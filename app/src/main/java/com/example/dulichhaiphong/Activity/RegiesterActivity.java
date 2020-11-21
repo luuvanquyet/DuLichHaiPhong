@@ -58,11 +58,17 @@ public class RegiesterActivity extends AppCompatActivity {
                         if(mpassword.isEmpty()){
                             password.setError("Mời bạn nhập Password");
                         }
+                        if(mpassword.length()<8){
+                            password.setError("Mời bạn nhập ít nhất là 8 ký tự");
+                        }
                         if(cmpassword.isEmpty()){
                             c_password.setError("Mời bạn nhập lại Password");
                         }
                         if(maccount.isEmpty()){
                             account.setError("Mời bạn nhập tên tài khoản");
+                        }
+                        if(maccount.length()< 8){
+                            account.setError("Mời bạn nhập ít nhất là 8 ký tự");
                         }
                     }else{
                         if(cmpassword.equals(mpassword)&& Kiemtraemail(memail)){

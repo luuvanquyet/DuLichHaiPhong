@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,9 +54,12 @@ public class Fragment_doipass extends DialogFragment {
                 public void onClick(View view) {
                     String mMatkhau = eMatkhau.getText().toString().trim();
                     String mXacNhanMk = eXacnhanMK.getText().toString().trim();
-                    if(mMatkhau.isEmpty()||mXacNhanMk.isEmpty()){
+                    if(mMatkhau.isEmpty()||mXacNhanMk.isEmpty()||mMatkhau.length()<8){
                         if(mMatkhau.isEmpty()){
                             eMatkhau.setError("Bạn chưa nhập mật khẩu!");
+                        }
+                        if(mMatkhau.length()<8){
+                            eMatkhau.setError("Mời bạn nhập ít nhất là 8 ký tự");
                         }
                         if(mXacNhanMk.isEmpty()){
                             eXacnhanMK.setError("Bạn chưa xác nhận mật khẩu!");

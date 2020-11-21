@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -34,6 +36,8 @@ import com.example.dulichhaiphong.Model.SessionManager;
 import com.example.dulichhaiphong.R;
 import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -62,7 +66,10 @@ public class ChitietBaiviet extends AppCompatActivity {
     private String getId;
     private HashMap<String,String> user;
     public static boolean liekd = false;
+    ShareDialog shareDialog;
+    ShareLinkContent shareLinkContent;
     SessionManager sessionManager;
+    Baiviet baiviet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +88,7 @@ public class ChitietBaiviet extends AppCompatActivity {
         Anhxa();
         Intent intent = getIntent();
         if(intent!=null){
-            Baiviet baiviet = (Baiviet) intent.getSerializableExtra("baiviet");
+             baiviet = (Baiviet) intent.getSerializableExtra("baiviet");
             khoiTaoContent(baiviet);
             sessionManager = new SessionManager(this);
         }
@@ -148,10 +155,17 @@ public class ChitietBaiviet extends AppCompatActivity {
                    }
                 }
             });
+
             fShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(ChitietBaiviet.this,"Da chon Share",Toast.LENGTH_SHORT).show();
+                    if(shareDialog.canShow(ShareLinkContent.class)){
+
+                        shareLinkContent = new ShareLinkContent.Builder()
+                                .setQuote(baiviet.getTenBaiViet() + "\n" + baiviet.getTomTat())
+                                .setContentUrl(Uri.parse(Server.url_share.concat(baiviet.getCode()))).build();
+                    }
+                    shareDialog.show(shareLinkContent);
                 }
             });
         }else{
@@ -183,6 +197,7 @@ public class ChitietBaiviet extends AppCompatActivity {
         fComment = (FloatingActionButton) findViewById(R.id.btnComment);
         fShare = (FloatingActionButton) findViewById(R.id.btnShare);
         fLike = (FloatingActionButton) findViewById(R.id.btnLike);
+        shareDialog = new ShareDialog(ChitietBaiviet.this);
     }
     private void Show_Function(){
         fView.show();

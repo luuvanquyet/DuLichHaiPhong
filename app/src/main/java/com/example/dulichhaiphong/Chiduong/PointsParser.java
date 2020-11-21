@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -14,9 +15,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
     TaskLoadedCallback taskCallback;
     String directionMode = "driving";
+
 
     public PointsParser(Context mContext, String directionMode) {
         this.taskCallback = (TaskLoadedCallback) mContext;
@@ -53,6 +57,8 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
     protected void onPostExecute(List<List<HashMap<String, String>>> result) {
         ArrayList<LatLng> points;
         PolylineOptions lineOptions = null;
+        String distance = "";
+        String duration = "";
         // Traversing through all the routes
         for (int i = 0; i < result.size(); i++) {
             points = new ArrayList<>();
@@ -62,6 +68,13 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
             // Fetching all the points in i-th route
             for (int j = 0; j < path.size(); j++) {
                 HashMap<String, String> point = path.get(j);
+                if(j==0){    // Get distance from the list
+                    distance = (String)point.get("distance");
+                    continue;
+                }else if(j==1){ // Get duration from the list
+                    duration = (String)point.get("duration");
+                    continue;
+                }
                 double lat = Double.parseDouble(point.get("lat"));
                 double lng = Double.parseDouble(point.get("lng"));
                 LatLng position = new LatLng(lat, lng);
@@ -69,11 +82,12 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
             }
             // Adding all the points in the route to LineOptions
             lineOptions.addAll(points);
+            Toast.makeText(getApplicationContext(),"Khoảng cách: "+distance + ", Thời gian: "+duration,Toast.LENGTH_LONG).show();
             if (directionMode.equalsIgnoreCase("walking")) {
-                lineOptions.width(10);
+                lineOptions.width(5);
                 lineOptions.color(Color.MAGENTA);
             } else {
-                lineOptions.width(20);
+                lineOptions.width(10);
                 lineOptions.color(Color.BLUE);
             }
             Log.d("mylog", "onPostExecute lineoptions decoded");

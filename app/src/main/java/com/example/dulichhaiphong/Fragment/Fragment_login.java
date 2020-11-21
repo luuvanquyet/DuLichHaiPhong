@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.example.dulichhaiphong.Model.SessionManager;
 import com.example.dulichhaiphong.R;
 import com.example.dulichhaiphong.ultil.CheckConNection;
 import com.example.dulichhaiphong.ultil.Server;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;

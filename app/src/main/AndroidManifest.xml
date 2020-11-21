@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,6 +20,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.FacebookContentProvider300536711038007"
+            android:exported="true" />
         <activity
             android:name=".Activity.BandoActivity"
             android:theme="@style/ThemeDitich"
@@ -87,7 +93,8 @@
             android:name=".Activity.Slider_Next"
             android:theme="@style/OrangeTheme"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Activity.Slider">
+        <activity android:name=".Activity.Slider"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

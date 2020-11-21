@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -56,7 +57,7 @@ public class Fragment_register extends DialogFragment {
                     final String mpassword = password.getText().toString().trim();
                     final String maccount = account.getText().toString().trim();
                     String cmpassword = c_password.getText().toString().trim();
-                    if(mname.isEmpty()||memail.isEmpty()||mpassword.isEmpty()||cmpassword.isEmpty()||maccount.isEmpty()){
+                    if(mname.isEmpty()||memail.isEmpty()||mpassword.isEmpty()||cmpassword.isEmpty()||maccount.isEmpty()||mpassword.length()<8||maccount.length() < 8){
                         if(mname.isEmpty()){
                             name.setError("Mời bạn nhập họ tên");
                         }
@@ -66,11 +67,17 @@ public class Fragment_register extends DialogFragment {
                         if(mpassword.isEmpty()){
                             password.setError("Mời bạn nhập Password");
                         }
+                        if(mpassword.length()<8){
+                            password.setError("Mời bạn nhập ít nhất là 8 ký tự");
+                        }
                         if(cmpassword.isEmpty()){
                             c_password.setError("Mời bạn nhập lại Password");
                         }
                         if(maccount.isEmpty()){
                             account.setError("Mời bạn nhập tên tài khoản");
+                        }
+                        if(maccount.length() < 8){
+                            account.setError("Mời bạn nhập ít nhất là 8 ký tự");
                         }
                     }else{
                         if(cmpassword.equals(mpassword)&& Kiemtraemail(memail)){
@@ -92,6 +99,7 @@ public class Fragment_register extends DialogFragment {
                 public void onClick(View view) {
                     Fragment_login fragment_login = new Fragment_login();
                     fragment_login.show(getActivity().getSupportFragmentManager(),"Login");
+                    dismiss();
                 }
             });
         }else{

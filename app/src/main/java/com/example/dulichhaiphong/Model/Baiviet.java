@@ -11,9 +11,10 @@ public class Baiviet implements Serializable {
     private String ngayDang;
     private String anhDaidien;
     private String noiDung;
+    private String code;
     private ArrayList<AnhLienQuan> anhLienQuanList;
 
-    public Baiviet(String idBaiViet, String tenBaiViet, String tomTat, String soLike, String ngayDang, String anhDaidien,String noiDung) {
+    public Baiviet(String idBaiViet, String tenBaiViet, String tomTat, String soLike, String ngayDang, String anhDaidien,String noiDung,String code) {
         this.idBaiViet = idBaiViet;
         this.tenBaiViet = tenBaiViet;
         this.tomTat = tomTat;
@@ -21,6 +22,7 @@ public class Baiviet implements Serializable {
         this.ngayDang = ngayDang;
         this.anhDaidien = anhDaidien;
         this.noiDung = noiDung;
+        this.code = code;
     }
 
     public Baiviet(String idBaiViet, String tenBaiViet, String tomTat, String soLike, String ngayDang, String anhDaidien, String noiDung, ArrayList<AnhLienQuan> anhLienQuanList) {
@@ -96,5 +98,13 @@ public class Baiviet implements Serializable {
 
     public void setAnhLienQuanList(ArrayList<AnhLienQuan> anhLienQuanList) {
         this.anhLienQuanList = anhLienQuanList;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

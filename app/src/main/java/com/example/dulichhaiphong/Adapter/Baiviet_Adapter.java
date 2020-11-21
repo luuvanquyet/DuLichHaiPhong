@@ -101,7 +101,7 @@ public class Baiviet_Adapter extends RecyclerView.Adapter<Baiviet_Adapter.MyView
                         Baiviet diadiem = new Baiviet(baivietFilter.get(i)
                                 .getIdBaiViet(), baivietFilter.get(i)
                                 .getTenBaiViet(),baivietFilter.get(i).getTomTat(),baivietFilter.get(i).getSoLike(), baivietFilter.get(i)
-                                .getNgayDang(),baivietFilter.get(i).getAnhDaidien(),baivietFilter.get(i).getNoiDung());
+                                .getNgayDang(),baivietFilter.get(i).getAnhDaidien(),baivietFilter.get(i).getNoiDung(),baivietFilter.get(i).getCode());
                         filterList.add(diadiem);
                     }
                 }

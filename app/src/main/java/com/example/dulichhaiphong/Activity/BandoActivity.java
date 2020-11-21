@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -241,7 +243,7 @@ public class BandoActivity extends AppCompatActivity implements OnMapReadyCallba
         MenuInflater inflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu_search_bando, menu);
         MenuItem search_item = menu.findItem(R.id.search_view);
-        SearchView searchView = (SearchView) search_item.getActionView();
+        final SearchView searchView = (SearchView) search_item.getActionView();
         searchView.setFocusable(false);
         searchView.setBackgroundResource(R.drawable.bg_white_rounded);
         searchView.setQueryHint("Tìm kiếm địa danh");
@@ -251,6 +253,7 @@ public class BandoActivity extends AppCompatActivity implements OnMapReadyCallba
                 s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
                 arrayDiadanh.clear();
                 Timkiem_diadanh_theoten(Server.url_search_diadanh_theoten,arrayDiadanh,s);
+                searchView.clearFocus();
                 return true;
             }
 
@@ -382,8 +385,8 @@ public class BandoActivity extends AppCompatActivity implements OnMapReadyCallba
                             }else{
                                 if(phamVi.equals("0")){
                                     map.clear();
-                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(vitriHientai,10));
                                     map.addMarker(markerHientai);
+                                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(vitriHientai,10));
                                     Toast.makeText(BandoActivity.this,"Có " + danhsachDiadanh.size()+" địa danh!",Toast.LENGTH_SHORT).show();
                                     for (int i = 0; i < danhsachDiadanh.size(); i++) {
                                         map.addMarker(new MarkerOptions().position(danhsachDiadanh.get(i).getToaDo()).title(danhsachDiadanh.get(i).getTenDiadanh()));
@@ -458,7 +461,7 @@ public class BandoActivity extends AppCompatActivity implements OnMapReadyCallba
         // Output format
         String output = "json";
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.map_api_key);
+       String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.map_api_key);
         return url;
     }
 

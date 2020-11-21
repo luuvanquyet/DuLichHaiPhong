@@ -113,7 +113,7 @@ public class Adapter_lichsuphattrien extends RecyclerView.Adapter<Adapter_lichsu
                         Baiviet diadiem = new Baiviet(baivietFilter.get(i)
                                 .getIdBaiViet(), baivietFilter.get(i)
                                 .getTenBaiViet(), baivietFilter.get(i).getTomTat(), baivietFilter.get(i).getSoLike(), baivietFilter.get(i)
-                                .getNgayDang(), baivietFilter.get(i).getAnhDaidien(), baivietFilter.get(i).getNoiDung());
+                                .getNgayDang(), baivietFilter.get(i).getAnhDaidien(), baivietFilter.get(i).getNoiDung(),baivietFilter.get(i).getCode());
                         filterList.add(diadiem);
                     }
                 }

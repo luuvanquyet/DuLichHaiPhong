@@ -334,7 +334,8 @@ public class DitichlichsuActivity extends AppCompatActivity implements Timkiemdi
                                 String soLike = jsonBaiviet.getString("SoLike");
                                 String ngayDang = jsonBaiviet.getString("NgayDang");
                                 String noiDung = jsonBaiviet.getString("Noidung");
-                                danhSachBaiviet.add(new Baiviet(id,tenBaiviet,tomtat,soLike,ngayDang,anhDaidien,noiDung));
+                                String code = jsonBaiviet.getString("Code");
+                                danhSachBaiviet.add(new Baiviet(id,tenBaiviet,tomtat,soLike,ngayDang,anhDaidien,noiDung,code));
                             }
                             Toast.makeText(DitichlichsuActivity.this,response,Toast.LENGTH_SHORT).show();
                             baiviet_adapter.notifyDataSetChanged();

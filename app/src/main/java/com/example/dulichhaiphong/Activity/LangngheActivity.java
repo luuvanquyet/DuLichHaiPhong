@@ -327,7 +327,8 @@ public class LangngheActivity extends AppCompatActivity implements Timkiemlangng
                                 String soLike = jsonBaiviet.getString("SoLike");
                                 String ngayDang = jsonBaiviet.getString("NgayDang");
                                 String noiDung = jsonBaiviet.getString("Noidung");
-                                danhSachBaiviet.add(new Baiviet(id,tenBaiviet,tomtat,soLike,ngayDang,anhDaidien,noiDung));
+                                String code = jsonBaiviet.getString("Code");
+                                danhSachBaiviet.add(new Baiviet(id,tenBaiviet,tomtat,soLike,ngayDang,anhDaidien,noiDung,code));
 
                             }
                             baiviet_adapter.notifyDataSetChanged();

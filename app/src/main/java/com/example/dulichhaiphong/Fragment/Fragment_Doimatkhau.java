@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,9 +38,12 @@ public class Fragment_Doimatkhau extends DialogFragment {
             public void onClick(View view) {
                 String mMatkhau = editMatkhau.getText().toString().trim();
                 String mCmatkhau = cMatkhau.getText().toString().trim();
-                if(mCmatkhau.isEmpty()||mCmatkhau.isEmpty()){
+                if(mCmatkhau.isEmpty()||mCmatkhau.isEmpty()||mMatkhau.length()<8){
                     if(mMatkhau.equals("")){
                         editMatkhau.setError("Mời bạn nhập mật khẩu!");
+                    }
+                    if(mMatkhau.length()<8){
+                        editMatkhau.setError("Mời bạn nhập ít nhất là 8 ký tự");
                     }
                     if(mCmatkhau.equals("")){
                         cMatkhau.setError("Mời bạn nhập lại mật khẩu!");
