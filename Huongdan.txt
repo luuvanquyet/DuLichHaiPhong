@@ -1,5 +1,0 @@
-Gioi thieu qua ve du an:
-+) App quang ba du lich Hai Phong.
-+) Du an duoc viet bang ngon ngu Java
-Huong dan chay ung dung.
-Tai phan mem android studio de download va chay duoc san pham.

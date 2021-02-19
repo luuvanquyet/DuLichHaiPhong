@@ -1,0 +1,3 @@
+Project name: Build an app promote tourism in Hai Phong written on Android platform using Java language.
+Instructions to install the application:
+Download Android Stdutio to setup  applicaiton.
